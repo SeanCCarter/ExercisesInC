@@ -2,6 +2,10 @@
 #include <stdlib.h>
 
 int card_value(char* card_name){
+	/* card_value: Decide what value a card has
+	 *             in a card counting system.
+	 * card_name: The input given by the user
+	 */
 	int val = -1;
 	switch(card_name[0]){
 		case 'K':
@@ -24,6 +28,13 @@ int card_value(char* card_name){
 }
 
 int increment_count(int val, int count){
+	/* increment_count: Given a card value, determine
+	 *             what happens to the count in a card
+	 *             counting system
+	 * val: The value of the card
+	 * count: The current count
+	 * returns: The count after the value has been used
+	 */
 	if ((val > 2) && (val < 7)){
 		count ++;
 	} else if (val == 10) {
