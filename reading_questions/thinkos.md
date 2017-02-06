@@ -53,6 +53,7 @@ the error messages you get might look very different.  Why?
 ### Virtual memory
 
 1) The Georgian alphabet has 33 letters.  How many bit are needed to specify a letter?
+*2^6, or 64 (2^5 is 32, one too few)*
 
 2) In the UTF-16 character encoding, the binary representation of a character can take up to 32 bits.  
 Ignoring the details of the encoding scheme, how many different characters can be represented?
