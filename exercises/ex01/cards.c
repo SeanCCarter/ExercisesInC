@@ -43,8 +43,11 @@ int increment_count(int val, int count){
 	return count;
 }
 
-int main()
-{
+int main() {
+	/*  repeatedly takes in user input (playing card values)
+		and keeps track of the count for a game of
+		blackjack 
+	*/
 	char card_name[3];
 	int count = 0;
 	int val;
