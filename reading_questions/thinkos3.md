@@ -11,7 +11,7 @@ Ignoring the details of the encoding scheme, how many different characters can b
 
 3) What is the difference between "memory" and "storage" as defined in Think OS? *Memory is a volatile place, where processes hold information while they run. Storage is where files go, so that processes can access them later, even if the computer is shut down. Basically, RAM vs HDDs and SSds*
 
-4) What is the difference between a GiB and a GB?  What is the percentage difference in their sizes? *A Gib is 2^30 bytes, while a GB is 10^12 bytes.*
+4) What is the difference between a GiB and a GB?  What is the percentage difference in their sizes? *A GiB is 2^30 bytes, while a GB is 10^9 bytes.  GB is 93% of a GiB*
 
 5) How does the virtual memory system help isolate processes from each other? *The virtual makes sure that programs never deal with actual, physical addresses, which means that they can't specify a memory location used by a different process.*
 
