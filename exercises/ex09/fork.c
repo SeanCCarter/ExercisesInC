@@ -18,6 +18,7 @@ License: MIT License https://opensource.org/licenses/MIT
 // errno is an external global variable that contains
 // error information
 extern int errno;
+static int check_memory = 1; // testing memory between processes
 
 
 // get_seconds returns the number of seconds since the
@@ -46,6 +47,8 @@ int main(int argc, char *argv[])
     pid_t pid;
     double start, stop;
     int i, num_children;
+    int * check_memory2 = malloc(sizeof(int));
+    *check_memory2 = 1;
 
     // the first command-line argument is the name of the executable.
     // if there is a second, it is the number of children to create.
@@ -73,6 +76,8 @@ int main(int argc, char *argv[])
       
 	/* see if we're the parent or the child */
 	if (pid == 0) {
+      check_memory = check_memory + 1;
+      *check_memory2 = *check_memory2 + 1;
 	  child_code(i);
 	}
     }
@@ -96,6 +101,24 @@ int main(int argc, char *argv[])
     // compute the elapsed time
     stop = get_seconds();
     printf("Elapsed time = %f seconds.\n", stop - start);
+    printf("Static memory variable value is now: %d\n", check_memory);
+    printf("Dynamic memory variable is now: %d\n", *check_memory2);
     
     exit(0);
 }
+
+/*
+Test results: 
+- Running with 1 chile is incredibly fast
+- All of the children were created first, then each one
+  ran and exited durring these tests.
+- Each additional child, beyond 1, adds about a second to runtime
+  which makes sense
+
+Adding memory allocation:
+- It looks like neither static nor heap segments are shared.
+  Creating both a static and dynamically allocated variable, 
+  and then changing it in the child, didn't change anything in
+  the parrent.
+
+*/
