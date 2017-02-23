@@ -1,18 +1,49 @@
+#include <ctype.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
+void tee(){
+
+}
 
 int main (int argc, char* argv[]) {
-  char line[256];
-  FILE *in_file = fopen(argv[1], "r");
-  FILE *out_file = fopen(argv[2], "w");
-  while (fscanf(in_file, "%255[^\n]\n", line) == 1){
-    fprintf(out_file, "%s\n",line);
-    fprintf(stdout, "%s\n",line);
+  char character;
+  char ch;
+  opterr = 0;
+  FILE *out_file;
+
+  while ((ch = getopt(argc, argv, "ai")) != -1){
+    switch(ch){
+    case 'a':
+      fprintf(stdout, "%s", "case a\n");
+       out_file = fopen(argv[argc-1], "a");
+      break;
+    case 'i':
+      fprintf(stdout, "%s", "case i\n");
+    case '?':
+      if (isprint(optopt)){
+        fprintf(stderr, "Unknown option %c\n", optopt);
+      }
+      else{
+        fprintf(stderr, "Unknown option character, could not print.\n");
+      }
+      return -1;
+      break;
+    default:
+      fprintf(stdout, "%s", "Flag not recognized");
+      fprintf(stderr, "%i", -1);
+    }
   }
-  return 0;
-  fclose(in_file);
+
+  //While there is still input, keep writing to out file
+  while (fscanf(stdin, "%c", &character) != -1){
+    fprintf(out_file, "%c",character);
+    fprintf(stdout, "%c",character);
+  }
   fclose(out_file);
+  return 0;
 }
 /*
 Planning:
