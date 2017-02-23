@@ -113,5 +113,4 @@ Comparison to actual tee:
   - The comments weren't actually very detailed. I think
     they assumed anyone reading it would have a very thourough
     grasp of c.
-
 */
