@@ -11,6 +11,7 @@ Some of our improvements to our process were also worked well. Durring our last 
 #### Head First C
 - [Chapter 2.5](../exercises/ex02.5/find_track.c)
 - [Chapter 3](../exercises/ex03/tee.c)
+- [Chapter 4](../exercises/ex04/Makefile)
 - [Chapter 9](../exercises/ex09/fork.c)
 
 #### ThinkOS
