@@ -17,7 +17,7 @@ typedef struct node {
 
 
 /* Makes a new node structure.
- * 
+ *
  * val: value to store in the node.
  * next: pointer to the next node
  *
@@ -32,12 +32,11 @@ Node *make_node(int val, Node *next) {
 
 
 /* Prints the values in a list.
- * 
+ *
  * list: pointer to pointer to Node
  */
 void print_list(Node **list) {
     Node *current = *list;
-
     printf("[ ");
     while (current != NULL) {
         printf("%d ", current->val);
@@ -48,29 +47,38 @@ void print_list(Node **list) {
 
 
 /* Removes and returns the first element of a list.
- * 
+ *
  * list: pointer to pointer to Node
  *
  * returns: int or -1 if the list is empty
  */
 int pop(Node **list) {
-    // FILL THIS IN!
-    return 0;
+    if (*list){
+      Node *head = *list;
+      *list = head->next;
+      return head->val;
+    }
+    else{
+      return 0;
+    }
 }
 
 
 /* Adds a new element to the beginning of the list.
- * 
+ *
  * list: pointer to pointer to Node
  * val: value to add
  */
 void push(Node **list, int val) {
-    // FILL THIS IN!
+  Node *previous_head = *list;
+  Node *new_head = make_node(val, NULL);
+  new_head->next = previous_head;
+  *list = new_head;
 }
 
 
 /* Removes the first element with the given value
- * 
+ *
  * Frees the removed node.
  *
  * list: pointer to pointer to Node
@@ -79,7 +87,23 @@ void push(Node **list, int val) {
  * returns: number of nodes removed
  */
 int remove_by_value(Node **list, int val) {
-    // FILL THIS IN!
+    Node *current_node = *list;
+    if (current_node->val == val){
+      *list = current_node->next;
+      return 1;
+    }
+
+    Node *previous_node = current_node;
+    current_node = previous_node->next;
+
+    while (current_node){
+      if (current_node->val == val){
+        previous_node->next = current_node->next;
+        return 1;
+      }
+      previous_node = current_node;
+      current_node = previous_node->next;
+    }
     return 0;
 }
 
@@ -87,11 +111,20 @@ int remove_by_value(Node **list, int val) {
 /* Reverses the elements of the list.
  *
  * Does not allocate or free nodes.
- * 
+ *
  * list: pointer to pointer to Node
  */
 void reverse(Node **list) {
-    // FILL THIS IN!
+  Node *previous = *list;
+  Node *current = previous->next;
+  previous->next = NULL;
+  while (current != NULL) {
+    Node *next_node = current->next;
+    current->next = previous;
+    previous = current;
+    current = next_node;
+  }
+  *list = previous;
 }
 
 
