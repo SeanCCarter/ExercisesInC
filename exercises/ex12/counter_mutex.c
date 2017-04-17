@@ -170,7 +170,7 @@ void child_code (Shared *shared)
 	    shared->counter++;
 
 	    if (shared->counter % 100000 == 0) {
-	        printf ("%d\n", shared->counter);
+	        //printf ("%d\n", shared->counter);
 	    }
       sem_signal(shared->sem);
     }
@@ -187,7 +187,7 @@ void *entry (void *arg)
 {
     Shared *shared = (Shared *) arg;
     child_code (shared);
-    printf ("Child done.\n");
+    //printf ("Child done.\n");
     pthread_exit (NULL);
 }
 
@@ -203,12 +203,12 @@ void check_array (Shared *shared)
 {
     int i, errors=0;
 
-    printf ("Checking...\n");
+    //printf ("Checking...\n");
 
     for (i=0; i<shared->end; i++) {
 	    if (shared->array[i] != 1) errors++;
     }
-    printf ("%d errors.\n", errors);
+    //printf ("%d errors.\n", errors);
 }
 
 /*  main
@@ -237,7 +237,7 @@ int main ()
 
 /*
 Answer to timing question: Counter took about 3 seconds,
-while counter_mutex took 16. That means that the overhead
+while counter_mutex took 15. That means that the overhead
 of Semaphore checking quintuples the time taken. Worth it,
 though.
 */
