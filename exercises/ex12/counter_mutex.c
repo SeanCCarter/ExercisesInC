@@ -234,3 +234,10 @@ int main ()
     check_array (shared);
     return 0;
 }
+
+/*
+Answer to timing question: Counter took about 3 seconds,
+while counter_mutex took 16. That means that the overhead
+of Semaphore checking quintuples the time taken. Worth it,
+though.
+*/
